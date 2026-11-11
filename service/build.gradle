@@ -1,0 +1,69 @@
+plugins {
+    id 'application'
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.freefair.lombok)
+    alias(libs.plugins.spring.dependency.management)
+    id 'jacoco'
+}
+
+springBoot {
+    mainClass = 'fi.poltsi.vempain.mcp.VempainMcpApplication'
+}
+
+group = 'fi.poltsi.vempain'
+version = libs.versions.release.get()
+
+bootJar {
+    archiveFileName = "${rootProject.name}-${version}.jar"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(libs.versions.java.get())
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-Xlint:deprecation', '-Xlint:unchecked', '-Werror']
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-webmvc:${libs.versions.spring.boot.get()}"
+    implementation "org.springframework.boot:spring-boot-starter-security:${libs.versions.spring.boot.get()}"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${libs.versions.spring.boot.get()}"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc:${libs.versions.spring.boot.get()}"
+    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${libs.versions.spring.boot.get()}"
+    testImplementation "org.springframework.boot:spring-boot-starter-security-test:${libs.versions.spring.boot.get()}"
+    testImplementation platform("org.junit:junit-bom:${libs.versions.junit.get()}")
+    testImplementation "org.junit.jupiter:junit-jupiter:${libs.versions.junit.get()}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${libs.versions.mockito.get()}"
+    testImplementation "org.testcontainers:testcontainers-junit-jupiter:${libs.versions.testcontainers.get()}"
+    testImplementation "org.testcontainers:testcontainers-postgresql:${libs.versions.testcontainers.get()}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:${libs.versions.junit.get()}"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:${libs.versions.spring.ai.get()}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}

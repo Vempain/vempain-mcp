@@ -1,0 +1,28 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+# .idea/   (disabled by the team code convention: shared IDE files are tracked)
+*.iml
+
+**/local.yml
+**/dev.yml
+
+# Ignore any log files
+*.log
+
+start.sh
+.junie
+
+# --- team code convention: keep the shared IDE files, ignore the rest (managed by apply-convention.py) ---
+.idea/*
+!.idea/eclipseCodeFormatter.xml
+!.idea/externalDependencies.xml
+!.idea/checkstyle-idea.xml
+!.idea/codeStyles/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.cursor/
+# --- end team code convention ---

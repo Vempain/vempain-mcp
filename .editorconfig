@@ -1,0 +1,48 @@
+# EditorConfig: https://editorconfig.org
+# Honoured natively by IntelliJ, VS Code (with the EditorConfig extension) and Cursor.
+# Declares the basics for ALL file types in one visible place. Java layout beyond this
+# is owned by .config/eclipse-formatter.xml; this file must never contradict it.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+max_line_length = 160
+
+[*.java]
+indent_size = 4
+max_line_length = 160
+# IntelliJ-specific: tell its native formatter the same limit so "Reformat Code" without the
+# Eclipse adapter is at least not wildly off. The adapter plugin remains the intended path.
+ij_java_wrap_long_lines = false
+ij_continuation_indent_size = 8
+ij_java_imports_layout = java.**, |, javax.**, |, jakarta.**, |, org.**, |, com.**, |, *, |, $*
+ij_java_class_count_to_use_import_on_demand = 999
+ij_java_names_count_to_use_import_on_demand = 999
+
+[*.md]
+max_line_length = 160
+trim_trailing_whitespace = false
+
+[*.{xml,pom}]
+indent_size = 2
+
+[*.{gradle,kts}]
+indent_size = 4
+
+[*.{yml,yaml}]
+indent_size = 2
+max_line_length = 160
+
+[*.{json,jsonc}]
+indent_size = 2
+
+[*.properties]
+max_line_length = off
+
+[Makefile]
+indent_style = tab
