@@ -1,5 +1,7 @@
 FROM eclipse-temurin:25-jre-alpine
 
+LABEL org.opencontainers.image.source="https://github.com/Vempain/vempain-mcp"
+
 EXPOSE 8080 8081
 
 RUN apk add --no-cache curl su-exec \
