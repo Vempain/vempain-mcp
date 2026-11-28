@@ -1,7 +1,7 @@
 [versions]
 release = "0.0.1-SNAPSHOT"
 java = "25"
-spring-boot = "4.1.2"
+spring-boot = "4.2.0"
 spring-ai = "2.0.0"
 freefair-lombok = "9.8.3"
 jacoco = "0.8.15"
